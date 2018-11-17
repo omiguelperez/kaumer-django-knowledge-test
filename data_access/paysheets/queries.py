@@ -55,8 +55,21 @@ class SettingsQueries:
                     cash_contributions=setting.cash_contributions, year=setting.year)
 
     @staticmethod
+    def _render_setting(setting):
+        return Setting.load(setting.id, setting.basic_salary,
+                            setting.transport_assistance, setting.holiday_percentage,
+                            setting.unemployment_percentage,
+                            setting.unemployment_interest, setting.premium_services,
+                            setting.health_percentage, setting.pension_percentage,
+                            setting.occupational_hazards, setting.cash_contributions,
+                            setting.year) if setting else None
+
+    @staticmethod
+    def get_by_year(year):
+        setting = SettingsORM.objects.filter(year=year).first()
+        return SettingsQueries._render_setting(setting)
+
+    @staticmethod
     def get_current_settings():
         setting = SettingsORM.objects.last()
-        return Setting.load(setting.id, setting.basic_salary,
-                            setting.transport_assistance, setting.health_percentage,
-                            setting.pension_percentage, setting.year) if setting else None
+        return SettingsQueries._render_setting(setting)

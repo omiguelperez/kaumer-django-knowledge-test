@@ -3,7 +3,7 @@
 
 class SettingOutput:
     def __init__(self, setting):
-        self.id = setting.setting.id
+        self.id = setting.id
         self.basic_salary = setting.basic_salary
         self.transport_assistance = setting.transport_assistance
         self.holiday_percentage = setting.holiday_percentage
