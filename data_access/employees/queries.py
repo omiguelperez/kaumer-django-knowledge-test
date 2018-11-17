@@ -38,5 +38,5 @@ class EmployeeQueries:
         for item in items:
             employees.append(Employee.load(item.id, item.person_number, item.name,
                                            item.last_name, item.email,
-                                           item.person_number))
+                                           item.phone_number))
         return employees
