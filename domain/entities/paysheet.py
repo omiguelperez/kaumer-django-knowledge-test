@@ -73,7 +73,7 @@ class PaysheetDetail:
         self.holidays = 0
         self.unemployment = 0
         self.unemployment_interest = 0
-        self.premium_servicies = 0
+        self.premium_services = 0
         self.occupational_hazards = 0
         self.cash_contributions = 0
 
@@ -91,7 +91,7 @@ class PaysheetDetail:
         self.unemployment = self.salary.value * setting.unemployment_percentage / 100
         self.unemployment_interest = self.salary.value * setting.\
             unemployment_interest / 100
-        self.premium_servicies = self.salary.value * setting.premium_services / 100
+        self.premium_services = self.salary.value * setting.premium_services / 100
         self.occupational_hazards = self.salary.value * setting.occupational_hazards / 100
         self.cash_contributions = self.salary.value * setting.cash_contributions / 100
 

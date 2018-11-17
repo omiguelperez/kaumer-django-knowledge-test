@@ -54,8 +54,6 @@ class PaysheetDetail(DomainModel, models.Model):
     total_accrued = models.FloatField()
     health_percentage = models.FloatField()
     pension_percentage = models.FloatField()
-    healt = models.FloatField()
-    pension = models.FloatField()
     total_deducted = models.FloatField()
     paid = models.FloatField()
 

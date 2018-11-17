@@ -21,7 +21,7 @@ class PaysheetDetailOutput:
         self.holidays = detail.holidays
         self.unemployment = detail.unemployment
         self.unemployment_interest = detail.unemployment_interest
-        self.premium_servicies = detail.premium_servicies
+        self.premium_services = detail.premium_services
         self.occupational_hazards = detail.occupational_hazards
         self.cash_contributions = detail.cash_contributions
 

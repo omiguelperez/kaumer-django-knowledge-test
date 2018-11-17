@@ -20,18 +20,20 @@ class PaysheetQueries:
 
     @staticmethod
     def update(paysheet, detail):
-        PaysheetDetailORM.objects.create(id=detail.id, paysheet=paysheet.id,
-                                         employee=detail.employee.id,
-                                         salary=detail.salary.id,
-                                         worked_days=detail.worked_days,
-                                         basic=detail.basic,
-                                         transport_assistance=detail.transport_assistance,
-                                         total_accrued=detail.total_accrued,
-                                         health_percentage=detail.health_percentage,
-                                         pension_percentage=detail.pension_percentage,
-                                         healt=detail.healt, pension=detail.pension,
-                                         total_deducted=detail.total_deducted,
-                                         paid=detail.paid)
+        PaysheetDetailORM.objects.create(
+            id=detail.id, paysheet_id=paysheet.id, employee_id=detail.employee.id,
+            salary_id=detail.salary.id, worked_days=detail.worked_days,
+            basic=detail.basic,  transport_assistance=detail.transport_assistance,
+            total_accrued=detail.total_accrued,
+            health_percentage=detail.health_percentage,
+            pension_percentage=detail.pension_percentage, health=detail.health,
+            pension=detail.pension, total_deducted=detail.total_deducted,
+            paid=detail.paid, holidays=detail.holidays,
+            unemployment=detail.unemployment,
+            unemployment_interest=detail.unemployment_interest,
+            premium_services=detail.premium_services,
+            occupational_hazards=detail.occupational_hazards,
+            cash_contributions=detail.cash_contributions)
 
     @staticmethod
     def get_by_employee(employee_id):

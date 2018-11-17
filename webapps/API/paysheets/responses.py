@@ -22,7 +22,7 @@ class PaysheetDetailResponse(serializers.Serializer):
     holidays = serializers.FloatField()
     unemployment = serializers.FloatField()
     unemployment_interest = serializers.FloatField()
-    premium_servicies = serializers.FloatField()
+    premium_services = serializers.FloatField()
     occupational_hazards = serializers.FloatField()
     cash_contributions = serializers.FloatField()
 

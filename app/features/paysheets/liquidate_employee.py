@@ -16,7 +16,7 @@ def liquidate_employee(employee_id, worked_days):
     paysheet = PaysheetQueries.get_by_date(year, month)
     if not paysheet:
         paysheet = Paysheet(year, month)
-        # PaysheetQueries.add(paysheet)
+        PaysheetQueries.add(paysheet)
 
     employee = EmployeeQueries.get(employee_id)
     if not employee:
@@ -34,6 +34,6 @@ def liquidate_employee(employee_id, worked_days):
     detail = PaysheetDetail(paysheet, employee, salary, worked_days)
     detail.calculate(setting)
 
-    # PaysheetQueries.update(paysheet, detail)
+    PaysheetQueries.update(paysheet, detail)
 
     return PaysheetOutput(paysheet, [detail])
