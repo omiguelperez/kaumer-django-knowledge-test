@@ -70,16 +70,30 @@ class PaysheetDetail:
         self.pension = 0
         self.total_deducted = 0
         self.paid = 0
+        self.holidays = 0
+        self.unemployment = 0
+        self.unemployment_interest = 0
+        self.premium_servicies = 0
+        self.occupational_hazards = 0
+        self.cash_contributions = 0
 
     def calculate(self, setting):
-        self.basic = self.salary / 30
+        self.basic = self.salary.value * self.worked_days / 30
         self.transport_assistance = self._calculate_transport_assistance(setting)
         self.total_accrued = self.basic + self.transport_assistance
+        self.health_percentage = setting.health_percentage
         self.pension_percentage = setting.pension_percentage
         self.health = self.basic * self.health_percentage / 100
-        self.pension = self.pension * self.pension_percentage / 100
+        self.pension = self.basic * self.pension_percentage / 100
         self.total_deducted = self.health + self.pension
         self.paid = self.total_accrued - self.total_deducted
+        self.holidays = self.salary.value * setting.holiday_percentage / 100
+        self.unemployment = self.salary.value * setting.unemployment_percentage / 100
+        self.unemployment_interest = self.salary.value * setting.\
+            unemployment_interest / 100
+        self.premium_servicies = self.salary.value * setting.premium_services / 100
+        self.occupational_hazards = self.salary.value * setting.occupational_hazards / 100
+        self.cash_contributions = self.salary.value * setting.cash_contributions / 100
 
     def _calculate_transport_assistance(self, setting):
         if self.salary.value <= setting.transport_assistance * 2:

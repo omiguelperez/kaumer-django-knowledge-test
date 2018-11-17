@@ -15,7 +15,8 @@ class PaysheetQueries:
     @staticmethod
     def get_by_date(year, month):
         paysheet = PaysheetORM.objects.filter(year=year, month=month).first()
-        return Paysheet.load(paysheet.id, paysheet.year, paysheet.month)
+        return Paysheet.load(paysheet.id, paysheet.year, paysheet.month) if paysheet \
+            else None
 
     @staticmethod
     def update(paysheet, detail):

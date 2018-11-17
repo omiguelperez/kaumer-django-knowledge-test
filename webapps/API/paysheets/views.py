@@ -19,6 +19,7 @@ class PaysheetView(APIView):
     def post(self, request):
         serializer = LiquidateEmployeeSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        output = liquidate_employee(**request.data)
+        output = liquidate_employee(**serializer.data)
+        output.details = output.details[0]
         response = LiquidateEmployeeResponse(output)
         return Response(response.data, status=HTTP_201_CREATED)

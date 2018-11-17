@@ -19,6 +19,12 @@ class PaysheetDetailResponse(serializers.Serializer):
     pension = serializers.FloatField()
     total_deducted = serializers.FloatField()
     paid = serializers.FloatField()
+    holidays = serializers.FloatField()
+    unemployment = serializers.FloatField()
+    unemployment_interest = serializers.FloatField()
+    premium_servicies = serializers.FloatField()
+    occupational_hazards = serializers.FloatField()
+    cash_contributions = serializers.FloatField()
 
 
 # noinspection PyAbstractClass

@@ -18,6 +18,12 @@ class PaysheetDetailOutput:
         self.pension = detail.pension
         self.total_deducted = detail.total_deducted
         self.paid = detail.paid
+        self.holidays = detail.holidays
+        self.unemployment = detail.unemployment
+        self.unemployment_interest = detail.unemployment_interest
+        self.premium_servicies = detail.premium_servicies
+        self.occupational_hazards = detail.occupational_hazards
+        self.cash_contributions = detail.cash_contributions
 
 
 class PaysheetOutput:
