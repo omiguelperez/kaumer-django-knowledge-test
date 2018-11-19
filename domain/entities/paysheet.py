@@ -96,14 +96,35 @@ class PaysheetDetail:
         self.cash_contributions = self.salary.value * setting.cash_contributions / 100
 
     def _calculate_transport_assistance(self, setting):
-        if self.salary.value <= setting.transport_assistance * 2:
+        print(self.salary.value)
+        print(setting.transport_assistance * 2)
+        if self.salary.value <= setting.basic_salary * 2:
             return setting.transport_assistance * self.worked_days / 30
         return 0
 
     @staticmethod
-    def load(detail_id, paysheet, employee, salary, worked_days):
+    def load(detail_id, paysheet, employee, salary, worked_days, basic,
+             transport_assistance, total_accrued, health_percentage, health,
+             pension_percentage, pension, total_deducted, paid, holidays, unemployment,
+             unemployment_interest, premium_services, occupational_hazards,
+             cash_contributions):
         detail = PaysheetDetail(paysheet, employee, salary, worked_days)
         detail.id = detail_id
+        detail.basic = basic
+        detail.transport_assistance = transport_assistance
+        detail.total_accrued = total_accrued
+        detail.health_percentage = health_percentage
+        detail.health = health
+        detail.pension_percentage = pension_percentage
+        detail.pension = pension
+        detail.total_deducted = total_deducted
+        detail.paid = paid
+        detail.holidays = holidays
+        detail.unemployment = unemployment
+        detail.unemployment_interest = unemployment_interest
+        detail.premium_services = premium_services
+        detail.occupational_hazards = occupational_hazards
+        detail.cash_contributions = cash_contributions
         return detail
 
 

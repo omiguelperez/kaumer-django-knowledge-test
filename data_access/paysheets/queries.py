@@ -2,7 +2,7 @@
 
 from data_access.paysheets.models import Paysheet as PaysheetORM, PaysheetDetail as \
     PaysheetDetailORM, Setting as SettingsORM
-from domain.entities.paysheet import Paysheet, Setting
+from domain.entities.paysheet import Paysheet, Setting, PaysheetDetail
 
 
 class PaysheetQueries:
@@ -37,7 +37,23 @@ class PaysheetQueries:
 
     @staticmethod
     def get_by_employee(employee_id):
-        pass
+        items = PaysheetDetailORM.objects.filter(employee_id=employee_id)
+        details = []
+        for item in items:
+            paysheet = Paysheet.load(item.paysheet.id, item.paysheet.year,
+                                     item.paysheet.month)
+            detail = PaysheetDetail.load(item.id, paysheet, item.employee.id,
+                                         item.salary, item.worked_days, item.basic,
+                                         item.transport_assistance, item.total_accrued,
+                                         item.health_percentage, item.health,
+                                         item.pension_percentage, item.pension,
+                                         item.total_deducted, item.paid, item.holidays,
+                                         item.unemployment, item.unemployment_interest,
+                                         item.premium_services,
+                                         item.occupational_hazards,
+                                         item.cash_contributions)
+            details.append(detail)
+        return details
 
 
 class SettingsQueries:
