@@ -57,3 +57,9 @@ class EmployeePaysheetDetailResponse(serializers.Serializer):
     cash_contributions = serializers.FloatField()
     year = serializers.IntegerField()
     month = serializers.IntegerField()
+
+
+# noinspection PyAbstractClass
+class VerifyLiquidatedResponse(serializers.Serializer):
+    is_liquidated = serializers.BooleanField()
+    detail = EmployeePaysheetDetailResponse(required=False)

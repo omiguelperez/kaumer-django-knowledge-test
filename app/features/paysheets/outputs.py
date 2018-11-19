@@ -56,3 +56,10 @@ class EmployeePaysheetDetailOutput:
         self.cash_contributions = detail.cash_contributions
         self.year = detail.paysheet.year
         self.month = detail.paysheet.month
+
+
+class VerifyLiquidatedOutput:
+    def __init__(self, is_liquidated, detail):
+        self.is_liquidated = is_liquidated
+        if detail:
+            self.detail = EmployeePaysheetDetailOutput(detail)

@@ -19,6 +19,13 @@ class PaysheetQueries:
             else None
 
     @staticmethod
+    def verify(year, month, employee_id):
+        item = PaysheetDetailORM.objects.filter(employee_id=employee_id,
+                                                paysheet__year=year,
+                                                paysheet__month=month).first()
+        return PaysheetQueries._map_detail(item) if item else None
+
+    @staticmethod
     def update(paysheet, detail):
         PaysheetDetailORM.objects.create(
             id=detail.id, paysheet_id=paysheet.id, employee_id=detail.employee.id,
@@ -40,20 +47,25 @@ class PaysheetQueries:
         items = PaysheetDetailORM.objects.filter(employee_id=employee_id)
         details = []
         for item in items:
-            paysheet = Paysheet.load(item.paysheet.id, item.paysheet.year,
-                                     item.paysheet.month)
-            detail = PaysheetDetail.load(item.id, paysheet, item.employee.id,
-                                         item.salary, item.worked_days, item.basic,
-                                         item.transport_assistance, item.total_accrued,
-                                         item.health_percentage, item.health,
-                                         item.pension_percentage, item.pension,
-                                         item.total_deducted, item.paid, item.holidays,
-                                         item.unemployment, item.unemployment_interest,
-                                         item.premium_services,
-                                         item.occupational_hazards,
-                                         item.cash_contributions)
+            detail = PaysheetQueries._map_detail(item)
             details.append(detail)
         return details
+
+    @staticmethod
+    def _map_detail(item):
+        paysheet = Paysheet.load(item.paysheet.id, item.paysheet.year,
+                                 item.paysheet.month)
+        detail = PaysheetDetail.load(item.id, paysheet, item.employee.id,
+                                     item.salary, item.worked_days, item.basic,
+                                     item.transport_assistance, item.total_accrued,
+                                     item.health_percentage, item.health,
+                                     item.pension_percentage, item.pension,
+                                     item.total_deducted, item.paid, item.holidays,
+                                     item.unemployment, item.unemployment_interest,
+                                     item.premium_services,
+                                     item.occupational_hazards,
+                                     item.cash_contributions)
+        return detail
 
 
 class SettingsQueries:

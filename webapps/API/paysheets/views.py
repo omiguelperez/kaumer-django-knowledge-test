@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
 
 from app.features.paysheets.get_employee_paysheets import get_employee_paysheets
 from app.features.paysheets.liquidate_employee import liquidate_employee
+from app.features.paysheets.verify_is_liquidated import verify_is_liquidated
 from webapps.API.paysheets.requests import LiquidateEmployeeSerializer
 from webapps.API.paysheets.responses import LiquidateEmployeeResponse, \
-    EmployeePaysheetDetailResponse
+    EmployeePaysheetDetailResponse, VerifyLiquidatedResponse
 from webapps.API.base import wrap_exceptions
 from drf_yasg.utils import swagger_auto_schema
 
@@ -37,3 +38,13 @@ class PaysheetDetailView(APIView):
         output = get_employee_paysheets(employee_id)
         response = EmployeePaysheetDetailResponse(output, many=True)
         return Response(response.data, status=HTTP_200_OK)
+
+
+# noinspection PyUnusedLocal
+@api_view(['GET'])
+@swagger_auto_schema(responses={HTTP_200_OK: VerifyLiquidatedResponse})
+@wrap_exceptions
+def verify_liquidated_view(request, employee_id):
+    output = verify_is_liquidated(employee_id)
+    response = VerifyLiquidatedResponse(output)
+    return Response(response.data, status=HTTP_200_OK)
